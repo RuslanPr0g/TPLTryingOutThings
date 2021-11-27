@@ -1,4 +1,5 @@
 ﻿// canc token
+// new can use new Cancc..() but with new we loose the power to cancel things, so that with the source we can cancel and tokens can monitor when operation was canceled
 var source = new CancellationTokenSource();
 
 // factory
