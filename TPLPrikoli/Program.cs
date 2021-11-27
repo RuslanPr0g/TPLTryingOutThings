@@ -1,8 +1,5 @@
-﻿var t1 = new Task(() => DoVeryImportantWork(1, 3000));
-var t2 = new Task(() => DoVeryImportantWork(2, 4000));
-
-t1.Start();
-t2.Start();
+﻿Task.Factory.StartNew(() => DoVeryImportantWork(1, 3000));
+Task.Factory.StartNew(() => DoVeryImportantWork(2, 4000));
 
 
 
