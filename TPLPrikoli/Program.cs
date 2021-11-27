@@ -1,10 +1,22 @@
-﻿// factory
-var t1 = Task.Factory.StartNew(() => DoVeryImportantWork(1, 3000)).ContinueWith((prev) => DoSomeOtherVeryImportantWork(1, 4000));
-var t2 = Task.Factory.StartNew(() => DoVeryImportantWork(2, 4000)).ContinueWith((prev) => DoSomeOtherVeryImportantWork(2, 3500));
+﻿// canc token
+var source = new CancellationTokenSource();
+
+// factory
+try
+{
+    var t1 = Task.Factory.StartNew(() => DoVeryImportantWork(1, 3000, source.Token)).ContinueWith((prev) => DoSomeOtherVeryImportantWork(1, 4000, source.Token));
+    //source.Cancel();
+    var t2 = Task.Factory.StartNew(() => DoVeryImportantWork(2, 4000, source.Token)).ContinueWith((prev) => DoSomeOtherVeryImportantWork(2, 3500, source.Token));
+}
+catch (TaskCanceledException canc)
+{
+    Console.WriteLine("WARNING: THE OPERATION CANCELED!");
+}
+
 var t3 = Task.Factory.StartNew(() => DoVeryImportantWork(3, 7000));
 
 // waiting
-var tlist = new List<Task> { t1, t2, t3 };
+var tlist = new List<Task> { t3 };
 Task.WaitAll(tlist.ToArray());
 
 // ForEachParallel
@@ -20,15 +32,25 @@ Parallel.ForEach(intList, t =>
 Console.WriteLine("Press smth pls");
 Console.ReadKey();
 
-static void DoVeryImportantWork(int id, int mills)
+static void DoVeryImportantWork(int id, int mills, CancellationToken token = default)
 {
+    if (token.IsCancellationRequested)
+    {
+        Console.WriteLine($"{id} cancelled!");
+        token.ThrowIfCancellationRequested();
+    }
     Console.WriteLine($"{id} started!");
     Thread.Sleep(mills);
     Console.WriteLine($"{id} executed!");
 }
 
-static void DoSomeOtherVeryImportantWork(int id, int mills)
+static void DoSomeOtherVeryImportantWork(int id, int mills, CancellationToken token = default)
 {
+    if (token.IsCancellationRequested)
+    {
+        Console.WriteLine($"{id} more work cancelled!");
+        token.ThrowIfCancellationRequested();
+    }
     Console.WriteLine($"{id} more work started!");
     Thread.Sleep(mills);
     Console.WriteLine($"{id} more work executed!");
