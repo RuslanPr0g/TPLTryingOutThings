@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPLPrikoli", "TPLPrikoli\TPLPrikoli.csproj", "{66F9FA79-714B-49C4-A083-4C9C79E7B693}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66F9FA79-714B-49C4-A083-4C9C79E7B693}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66F9FA79-714B-49C4-A083-4C9C79E7B693}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66F9FA79-714B-49C4-A083-4C9C79E7B693}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66F9FA79-714B-49C4-A083-4C9C79E7B693}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F15E1B91-9231-461C-9825-3CD7CC418439}
+	EndGlobalSection
+EndGlobal
